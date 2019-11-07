@@ -8,7 +8,7 @@
   },
   "author": "Bruno Melo <bruno94@outlook.com>",
   "bin": {
-    "starbucks": "index.js"
+    "gitprofile": "index.js"
   },
   "license": "MIT",
   "devDependencies": {
