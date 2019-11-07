@@ -4,22 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "build": "sucrase lib -d dist --transforms typescript,imports"
+    "test": "jest"
   },
-  "author": "",
+  "author": "Bruno Melo <bruno94@outlook.com>",
+  "bin": {
+    "starbucks": "index.js"
+  },
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^12.12.6",
-    "@typescript-eslint/eslint-plugin": "^2.6.1",
-    "@typescript-eslint/parser": "^2.6.1",
     "eslint": "^6.6.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "jest": "^24.9.0",
-    "sucrase": "^3.10.1"
+    "jest": "^24.9.0"
+  },
+  "dependencies": {
+    "commander": "^4.0.0",
+    "inquirer": "^7.0.0"
   }
 }
