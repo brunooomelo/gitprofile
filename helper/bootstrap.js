@@ -4,10 +4,15 @@ const path = require('path')
 
 const bootstrap = () => {
   const homedir = path.join(os.homedir(), '.gitprofile.yml')
-  fs.stat(homedir, function (err) {
-    if (err && err.code === 'ENOENT') {
-      fs.writeFileSync(homedir, '')
-    }
+  return new Promise((resolve, reject) => {
+    fs.stat(homedir, err => {
+      if (err && err.code === 'ENOENT') {
+        return fs.writeFile(homedir, '', () => {
+          return resolve()
+        })
+      }
+      return resolve()
+    })
   })
 }
 
