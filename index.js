@@ -2,7 +2,7 @@
 
 const program = require('commander')
 const { list, add, checkout } = require('./actions')
-
+const bootstrap = require('./helper/bootstrap')
 const { version } = require('./package.json')
 
 program
@@ -24,4 +24,8 @@ program
 program
   .command('remove [name]', '')
 
-program.parse(process.argv)
+program
+  .command('status', '')
+
+bootstrap()
+  .then(() => program.parse(process.argv))
