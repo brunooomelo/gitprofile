@@ -8,7 +8,7 @@
   },
   "author": "Bruno Melo <bruno94@outlook.com>",
   "bin": {
-    "gitprofile": "index.js"
+    "gitprofiles": "index.js"
   },
   "license": "MIT",
   "devDependencies": {
