@@ -3,21 +3,22 @@ const yaml = require('js-yaml')
 const os = require('os')
 const path = require('path')
 const { exec } = require('child_process')
+const { promisify } = require('util')
 
+const execall = promisify(exec)
 const homedir = path.join(os.homedir(), '.gitprofile.yml')
 
-const checkout = (key) => {
-  const doc = yaml.safeLoad(fs.readFileSync(homedir, 'utf8'))
-  if (!doc[key]) {
-    return console.log('profile not exist')
-  }
-  exec('git config --global user.name ' + `"${doc[key].username}"`)
-  exec('git config --global user.email ' + doc[key].email)
-
-  exec('git config --list', (error, stdout) => {
-    if (error) {
-      throw error
+const checkout = async (key) => {
+  try {
+    const doc = yaml.safeLoad(fs.readFileSync(homedir, 'utf8'))
+    if (!doc[key]) {
+      return console.log('profile not exist')
     }
+
+    await execall(`git config --global user.name "${doc[key].username}"`)
+    await execall(`git config --global user.email "${doc[key].email}"`)
+
+    const { stdout } = await execall('git config --list')
     const data = stdout.split('\n').reduce((acc, curr) => {
       const [key, value] = curr.split('=')
       if (!key) {
@@ -29,11 +30,13 @@ const checkout = (key) => {
       }
     }, {})
     console.log(`
-        current config
-        name: ${data['user.name']}
-        email: ${data['user.email']}
-      `)
-  })
+      current config
+      name: ${data['user.name']}
+      email: ${data['user.email']}
+    `)
+  } catch (error) {
+    throw error
+  }
 }
 
 module.exports = checkout

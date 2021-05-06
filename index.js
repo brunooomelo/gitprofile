@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-const { list, add, checkout, status } = require('./actions')
+const { list, add, checkout, status, remove } = require('./actions')
+
 const bootstrap = require('./helper/bootstrap')
 const { version } = require('./package.json')
 
@@ -23,6 +24,7 @@ program
 
 program
   .command('remove [name]', '')
+  .action(remove)
 
 program
   .command('status', '')
