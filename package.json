@@ -1,6 +1,6 @@
 {
   "name": "gitprofiles",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "author": "Bruno Melo <bruno94@outlook.com>",
   "bin": {
-    "gitprofiles": "index.js"
+    "gitprofile": "index.js"
   },
   "license": "MIT",
   "devDependencies": {
