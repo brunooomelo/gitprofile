@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const program = require('commander')
-const { list, add, checkout } = require('./actions')
+const { list, add, checkout, status } = require('./actions')
 const bootstrap = require('./helper/bootstrap')
 const { version } = require('./package.json')
 
@@ -26,6 +26,7 @@ program
 
 program
   .command('status', '')
+  .action(status)
 
 bootstrap()
   .then(() => program.parse(process.argv))
