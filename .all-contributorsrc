@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "brunooomelo",
+      "name": "Bruno Melo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12174318?v=4",
+      "profile": "https://brunooomelo.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "gitprofiles",
+  "projectOwner": "brunooomelo",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
