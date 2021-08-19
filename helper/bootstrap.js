@@ -1,19 +1,17 @@
-const fs = require('fs')
-const os = require('os')
-const path = require('path')
+const fs = require('fs');
+const { promisify } = require('util');
 
-const bootstrap = () => {
-  const homedir = path.join(os.homedir(), '.gitprofile.yml')
-  return new Promise((resolve, reject) => {
-    fs.stat(homedir, err => {
-      if (err && err.code === 'ENOENT') {
-        return fs.writeFile(homedir, '', () => {
-          return resolve()
-        })
-      }
-      return resolve()
-    })
-  })
-}
+const fsStat = promisify(fs.stat);
+const fsWriteFile = promisify(fs.writeFile);
 
-module.exports = bootstrap
+const bootstrap = (homedir) => {
+  return fsStat(homedir).catch((err) => {
+    if (err && err.code === 'ENOENT') {
+      return fsWriteFile(homedir, '').catch((error) => {
+        throw new Error(error);
+      });
+    }
+  });
+};
+
+module.exports = bootstrap;
