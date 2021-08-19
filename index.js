@@ -1,34 +1,22 @@
 #!/usr/bin/env node
 
-const program = require('commander')
-const { list, add, checkout, status, remove } = require('./actions')
+const program = require('commander');
+const { list, create, checkout, status, remove } = require('./actions');
 
-const bootstrap = require('./helper/bootstrap')
-const { version } = require('./package.json')
+const bootstrap = require('./helper/bootstrap');
+const { homedir } = require('./helper/constants');
+const { version } = require('./package.json');
 
-program
-  .version(version)
-  .description('Fake package manager')
+program.version(version).description('Fake package manager');
 
-program
-  .command('add', '')
-  .action(add)
+program.command('create', '').action(create);
 
-program
-  .command('list', '')
-  .action(list)
+program.command('list', '').action(list);
 
-program
-  .command('checkout <key>', '')
-  .action(checkout)
+program.command('checkout', '').action(checkout);
 
-program
-  .command('remove [name]', '')
-  .action(remove)
+program.command('remove [name]', '').action(remove);
 
-program
-  .command('status', '')
-  .action(status)
+program.command('status', '').action(status);
 
-bootstrap()
-  .then(() => program.parse(process.argv))
+bootstrap(homedir).then(() => program.parse(process.argv));

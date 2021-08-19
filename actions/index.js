@@ -1,13 +1,13 @@
-const list = require('./list')
-const add = require('./add')
-const checkout = require('./checkout')
-const status = require('./status')
-const remove = require('./remove')
+const list = require("./list");
+const create = require("./create");
+const checkout = require("./checkout");
+const status = require("./status");
+const remove = require("./remove");
 
 module.exports = {
   list,
-  add,
+  create,
   checkout,
   status,
-  remove
-}
+  remove,
+};

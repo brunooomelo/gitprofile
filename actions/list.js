@@ -1,31 +1,33 @@
-const fs = require('fs')
-const yaml = require('js-yaml')
-const os = require('os')
-const path = require('path')
+const boxen = require('boxen');
+const fileYAML = require('../helper/file');
 
-const homedir = path.join(os.homedir(), '.gitprofile.yml')
-const buildResponse = data => {
-  const result = Object.keys(data).map(key => ({
+const buildResponse = (data) => {
+  const result = Object.keys(data).map((key) => ({
     key,
-    ...data[key]
-  }))
-  return result
-}
+    ...data[key],
+  }));
+  return result;
+};
 
-const list = () => {
+const list = async () => {
   try {
-    const doc = yaml.safeLoad(fs.readFileSync(homedir, 'utf8'))
-    buildResponse(doc).map((item, index, arr) => {
-      console.log(`${item.key}`)
-      console.log(` username: ${item.username}`)
-      console.log(` email: ${item.email}`)
-      if (arr.length !== index + 1) {
-        console.log('\n')
-      }
-    })
+    const doc = await fileYAML.getYAML();
+    console.log(
+      boxen(
+        buildResponse(doc)
+          .map(
+            (item) =>
+              `${item.key}\nusername: ${item.username}\nemail: ${item.email}\n`
+          )
+          .join('\n________________________\n'),
+        {
+          padding: 1,
+        }
+      )
+    );
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-module.exports = list
+module.exports = list;
